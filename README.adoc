@@ -1,0 +1,43 @@
+= AWS SQS Sender
+
+Open Liberty based application to send/receive messages to AWS SQS and list queues in user's AWS SQS.
+
+The purpose of this application is to offer simple API to send messages to AWS SQS. Simple API is realized by offering a REST service that uses Amazon Java SDK and takes configuration from environment variables.
+
+=== Local usage
+
+Run image locally:
+
+`docker run -it --rm -p 8085:9080 -e WLP_LOGGING_CONSOLE_LOGLEVEL=INFO -e AWS_REGION=eu-central-1 -e AWS_ACCESS_KEY_ID=your_aws_access_key -e AWS_SECRET_ACCESS_KEY=your_aws_secret -e AWS_SQS_QUEUE_URL=your_queue_url kazhar/awssqssender`
+
+Or clone this repo and build image locally before running the image: `docker build -t awssqssender .`
+
+Environment variables:
+
+* `WLP_LOGGING_CONSOLE_LOGLEVEL`
+** Optional log level of OpenLiberty. Default value is `AUDIT` and possible values are: `INFO, AUDIT, WARNING, ERROR, and OFF`.
+* `AWS_REGION`
+** Mandatory. Region where your SQS queues are.
+* `AWS_ACCESS_KEY_ID`
+** Mandatory. 
+* `AWS_SECRET_ACCESS_KEY`
+** Mandatory. 
+* `AWS_SQS_QUEUE_URL`
+** Mandatory for sending/receiving messages. Your AWS queue URL.
+
+
+It takes a few seconds to start and then you can use the REST service to list queues and send/receive messages from a queue.
+
+Sample curl commands:
+
+* List your queues in the region:
+** `curl --url http://localhost:8085/listqueues`
+* Send messages to queue:
+** `curl --request POST --url http://localhost:8085/sendmessage --header 'Content-Type: application/json' --data '{"msg":"Hello World!"}'`
+* Receive messages from queue:
+** `curl --url http://localhost:8085/receivemessages`
+
+
+=== IBM Functions (OpenWhisk)
+
+TODO
