@@ -4,7 +4,7 @@ Open Liberty based application to send/receive messages to AWS SQS and list queu
 
 The purpose of this application is to offer simple API to send messages to AWS SQS. Simple API is realized by offering a REST service that uses Amazon Java SDK and takes configuration from environment variables.
 
-=== Local usage
+== Usage
 
 Run image locally:
 
@@ -36,8 +36,3 @@ Sample curl commands:
 ** `curl --request POST --url http://localhost:8085/sendmessage --header 'Content-Type: application/json' --data '{"msg":"Hello World!"}'`
 * Receive messages from queue:
 ** `curl --url http://localhost:8085/receivemessages`
-
-
-=== IBM Functions (OpenWhisk)
-
-TODO
