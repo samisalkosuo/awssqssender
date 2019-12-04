@@ -1,0 +1,5 @@
+applications:
+   - name: awssqssender
+     path: target/awssqssender.war
+     memory: 256M
+     instances: 1
